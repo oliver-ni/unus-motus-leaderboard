@@ -24,7 +24,8 @@ defmodule UnusMotus.MixProject do
     [
       {:plug_cowboy, "~> 2.0"},
       {:jason, "~> 1.2"},
-      {:mongodb, "~> 0.5.1"}
+      {:mongodb, "~> 0.5.1"},
+      {:corsica, "~> 1.0"}
     ]
   end
 end

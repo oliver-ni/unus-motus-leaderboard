@@ -9,12 +9,10 @@ defmodule UnusMotus.Endpoint do
   use Plug.Router
 
   plug Plug.Logger
+  plug Corsica, origins: "*"
+
   plug :match
-
-  plug Plug.Parsers,
-    parsers: [:json],
-    json_decoder: Jason
-
+  plug Plug.Parsers, parsers: [:json], json_decoder: Jason
   plug :dispatch
 
   get "/" do
