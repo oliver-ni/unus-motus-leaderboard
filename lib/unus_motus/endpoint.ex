@@ -1,6 +1,6 @@
 defimpl Jason.Encoder, for: BSON.ObjectId do
   def encode(value, _opts) do
-    BSON.ObjectId.encode!(value)
+    "\"" <> BSON.ObjectId.encode!(value) <> "\""
   end
 end
 
