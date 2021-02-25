@@ -26,8 +26,9 @@ defmodule UnusMotus.Endpoint do
   post "/leaderboard" do
     {status, data} =
       case conn.body_params do
-        %{"name" => name, "score" => score} when is_binary(name) and is_integer(score) ->
-          :ok = Database.save_score(name, score)
+        %{"name" => name, "score" => score, "moves" => moves, "level" => level}
+        when is_binary(name) and is_integer(score) and is_integer(moves) and is_integer(level) ->
+          :ok = Database.save_score(name, score, moves, level)
           {200, %{status: "success"}}
 
         _ ->

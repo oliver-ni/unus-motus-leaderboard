@@ -7,8 +7,8 @@ defmodule UnusMotus.Database do
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 
-  def save_score(name, score) do
-    GenServer.call(__MODULE__, {:save, name, score})
+  def save_score(name, score, moves, level) do
+    GenServer.call(__MODULE__, {:save, name, score, moves, level})
   end
 
   def fetch_scores do
@@ -24,8 +24,15 @@ defmodule UnusMotus.Database do
   end
 
   @impl true
-  def handle_call({:save, name, score}, _from, state) do
-    {:ok, _} = Mongo.insert_one(state.conn, "leaderboard", %{name: name, score: score})
+  def handle_call({:save, name, score, moves, level}, _from, state) do
+    {:ok, _} =
+      Mongo.insert_one(state.conn, "leaderboard", %{
+        name: name,
+        score: score,
+        moves: moves,
+        level: level
+      })
+
     {:reply, :ok, state}
   end
 
